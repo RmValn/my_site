@@ -1,0 +1,21 @@
+.reg_form{
+    align-items: center;
+}
+
+#main_content{
+   margin-top: 10%;
+}
+.auth_button{
+    width: 100%;
+    
+}
+#err_body{
+    background-image: url("{{ url_for('static', /images/not_found.jpg) }}");
+    background-size: 20%
+}
+[class*=auth_content-]{
+   max-width: 800px;
+}
+.btnbtn:hover{
+    background-color: indigo;
+}

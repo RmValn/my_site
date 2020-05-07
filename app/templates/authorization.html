@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+<!-- Content here -->
+<ul class="nav nav-tabs justify-content-center" role="tablist">
+  <li class="nav-item">
+    {% if request.path == "/login" %}
+    <a class="nav-link active" href="{{url_for('login')}}" role="tab">Вхід</a>
+    {% endif %}
+    {% if request.path == "/register" %}
+    <a class="nav-link" href="{{url_for('login')}}" role="tab">Вхід</a>
+    {% endif %}
+    {% block login %}
+
+    {% endblock %}
+  </li>
+  <li class="nav-item">
+    {% if request.path == "/register" %}
+    <a class="nav-link active" role="tab" href="{{url_for('register')}}">Реєстрація</a>
+    {% endif %}
+    {% if request.path == "/login" %}
+    <a class="nav-link" href="{{url_for('register')}}" role="tab">Реєстрація</a>
+    {% endif %}
+    {% block register %}
+
+    {% endblock %}
+
+  </li>
+</ul>
+</div>>
+{% endblock %}

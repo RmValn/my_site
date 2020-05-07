@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+<div class="auth_form">
+    
+    
+    <form class="form form-horizontal" method="post" role="form">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.username) }}
+        {{ wtf.form_field(form.password) }}
+        {{ wtf.form_field(form.remember_me) }}
+        {{ wtf.form_field(form.submit, class="auth_button btn btn-primary") }}
+    </form>
+</div>
+{% endblock %}

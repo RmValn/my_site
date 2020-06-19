@@ -35,9 +35,9 @@
               Меню
             </button>
             <div class="menu-drop dropdown-menu dropdown-menu-left">
-              <a class="dropdown-item" href="{% if current_user.is_authenticated %}{{ url_for('user', username=current_user.username) }}{% else %}{{ url_for('login') }}{% endif %}">{% if current_user.is_authenticated %}Профіль{% else %}Вхід{% endif %}</a>
+              <a class="dropdown-item" href="{% if current_user.is_authenticated %}{{ url_for('user', username=current_user.username) }}{% else %}{{ url_for('login') }}{% endif %}">{% if current_user.is_authenticated %}Профіль{% else %}Авторизація{% endif %}</a>
               {% if current_user.is_authenticated == False %}
-                <a class="dropdown-item" href="{{ url_for('register') }}">Реєстрація</a>
+                <a class="dropdown-item" href="#">...</a>
               {% endif %}
               {% if current_user.is_authenticated %}
                 <li role="presentation" class="dropdown-divider"></li>

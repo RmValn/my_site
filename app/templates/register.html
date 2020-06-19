@@ -1,18 +1,25 @@
-{% extends "base.html" %}
+{% extends "authorization.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 {% block register %}
-    <div class="auth_form col-md-12">
+    <div class="col-md-12">
         <form class="form form-horizontal" method="post" role="form">
             {{ form.hidden_tag() }}
+            <div class="form-row">
+                <div class="col">
+            {{ wtf.form_field(form.firstname, placeholder='Ім\'я') }}
+                </div>
             
-            {{ wtf.form_field(form.firstname) }}
-            {{ wtf.form_field(form.secondname) }}
-            {{ wtf.form_field(form.username) }}
-            {{ wtf.form_field(form.email) }}
-            {{ wtf.form_field(form.password) }}
-            {{ wtf.form_field(form.repeat_password) }}
+            
+                <div class="col">
+            {{ wtf.form_field(form.secondname, placeholder='Прізвище') }}
+                </div>
+            </div>
+            {{ wtf.form_field(form.username, placeholder='Логін') }}
+            {{ wtf.form_field(form.email, placeholder='Електронна адреса') }}
+            {{ wtf.form_field(form.password, placeholder='Пароль') }}
+            {{ wtf.form_field(form.repeat_password, placeholder='Повторіть пароль') }}
             {{ wtf.form_field(form.submit, class="auth_button btn btn-primary") }}
                 </form>
             </div>
-            </div>
+            
 {% endblock %}

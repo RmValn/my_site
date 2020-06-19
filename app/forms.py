@@ -5,19 +5,19 @@ from app.models import User
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Логін', validators=[DataRequired(message="Поле обов'язкове для заповнення")])
-    password = PasswordField('Пароль', validators=[DataRequired(message="Поле обов'язкове для заповнення")])
+    username = StringField('', validators=[DataRequired(message="Поле обов'язкове для заповнення")])
+    password = PasswordField('', validators=[DataRequired(message="Поле обов'язкове для заповнення")])
     remember_me = BooleanField('Запам\'ятати мене')
     submit = SubmitField('Вхід')
 
     
 class RegistrationForm(FlaskForm):
-    firstname = StringField('Ім\'я', validators=[DataRequired(message="Поле обов'язкове для заповнення")])
-    secondname = StringField('Прізвище', validators=[DataRequired(message="Поле обов'язкове для заповнення")])
-    username = StringField('Логін', validators=[DataRequired(message="Поле обов'язкове для заповнення")])
-    email = StringField('Електронна адреса', validators=[DataRequired(message="Поле обов'язкове для заповнення"), Email(message="Невірна електронна адреса!")])
-    password = PasswordField('Пароль', validators=[DataRequired(message="Поле обов'язкове для заповнення"), Length(min=8, message='Пароль має містити мінімум 8 символів')])
-    repeat_password = PasswordField('Повторіть пароль', validators=[DataRequired(message="Поле обов'язкове для заповнення"), EqualTo('password', message='Паролі не збігаються!')])
+    firstname = StringField('', validators=[DataRequired(message="Поле обов'язкове для заповнення")])
+    secondname = StringField('', validators=[DataRequired(message="Поле обов'язкове для заповнення")])
+    username = StringField('', validators=[DataRequired(message="Поле обов'язкове для заповнення")])
+    email = StringField('', validators=[DataRequired(message="Поле обов'язкове для заповнення"), Email(message="Невірна електронна адреса!")])
+    password = PasswordField('', validators=[DataRequired(message="Поле обов'язкове для заповнення"), Length(min=8, message='Пароль має містити мінімум 8 символів')])
+    repeat_password = PasswordField('', validators=[DataRequired(message="Поле обов'язкове для заповнення"), EqualTo('password', message='Паролі не збігаються!')])
     submit = SubmitField('Реєстрація')
 
     def validate_username(self, username):

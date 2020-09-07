@@ -55,10 +55,11 @@
               
               
             </ul>
+            {% if current_user.is_authenticated %}
             <div class="nav-item mr-sm-5 my-2">
-              <span id="icon_chat" class="fa fa-wechat"></span>
+              <a href="{{url_for('messages')}}"><span id="icon_chat" class="fa fa-wechat"></span></a>
             </div>
-          
+          {% endif %}
           <div class="form-inline">
             
             <form class="my-2 my-lg-0 form_search">
@@ -83,7 +84,7 @@
           {% endfor %}
       {% endwith %}
       
-      {% if request.path == '/register' or request.path == '/login' %} <div class="auth_content-lg-6 container">{% endif %}
+      <!--{% if request.path == '/register' or request.path == '/login' %} <div class="auth_content-lg-6 container">{% endif %}-->
       
       
        <div id="main_content">
@@ -91,6 +92,6 @@
 
         {% endblock %}
       </div>
-      </div>
+     
     </body>
     </html>

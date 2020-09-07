@@ -35,7 +35,7 @@ def login():
                     next_page = url_for('index')
                 return redirect(next_page)
             flash('Невірний логін або пароль!', category='error')
-            return redirect(url_for('authorization'))
+            return redirect(url_for('login'))
             print(User.query.filter_by(email=form.username.data).first())
             users = User.query.filter_by(email=form.username.data).first()
             print(users)
@@ -104,6 +104,20 @@ def settings():
         user = User.query.filter_by(username=username).first_or_404()
         return render_template('settings.html', user=user, title="Налаштування - " + username, current_user=current_user, form=form, form2=form2, search_form=search_form)
     return redirect(url_for('page_not_found'))
+
+@login_required
+@app.route('/messages')
+def messages():
+    username = current_user.username
+    user = User.query.filter_by(username=username).first_or_404()
+    if current_user == user:
+        form = RegistrationForm()
+        search_form = SearchForm()
+        form2 = LoginForm()
+        user = User.query.filter_by(username=username).first_or_404()
+        return render_template('messages.html', user=user, title="Повідомлення", current_user=current_user, form=form, form2=form2, search_form=search_form)
+
+
 
 @app.route('/page_not_found')
 def page_not_found():

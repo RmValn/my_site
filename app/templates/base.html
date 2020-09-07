@@ -58,6 +58,7 @@
             {% if current_user.is_authenticated %}
             <div class="nav-item mr-sm-5 my-2">
               <a href="{{url_for('messages')}}"><span id="icon_chat" class="fa fa-wechat"></span></a>
+              {{ current_user.username }}
             </div>
           {% endif %}
           <div class="form-inline">

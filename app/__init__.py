@@ -49,7 +49,7 @@ def create_user():
             pass_hash = generate_password_hash('zzzzzzzz')
             user_datastore.create_role(name='admin', description='Administrator')
             first_user = user_datastore.create_user(email='valentyn@gmail.com',
-                    password_hash=pass_hash, active=True, firstname='admin', secondname='admin', slug='q', roles=['admin'], username='valentyn')
+                    password_hash=pass_hash, active=True, slug='1', firstname='admin', secondname='admin', roles=['admin'], username='valentyn')
             user_datastore.toggle_active(first_user)
             db.session.commit()
             logout_user()

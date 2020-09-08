@@ -3,11 +3,11 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
+from flask_admin.contrib.sqla import ModelView 
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
-
-from flask_security import current_user, login_required, Security, SQLAlchemyUserDatastore, utils
+from werkzeug.security import generate_password_hash
+from flask_security import current_user, login_required, Security, SQLAlchemyUserDatastore, utils, logout_user
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -37,18 +37,22 @@ admin.add_view(models.MyModelView(models.Post, db.session))
 
 
 
-# @app.before_first_request
-# def before_first_request():
 
-#     db.create_all()
-
-#     user_datastore.find_or_create_role(name='admin', description='Administrator')
-
-#     encrypted_password = utils.encrypt_password('admin')
-#     if not user_datastore.get_user('someone@example.com'):
-#         user_datastore.create_user(email='someone@example.com', password_hash=encrypted_password)
-
-#     db.session.commit()
-
-#     user_datastore.add_role_to_user('admin@example.com', 'admin')
-#     db.session.commit()
+@app.before_first_request
+def create_user():
+    admin_user = models.User.query.filter_by(email='valentyn@gmail.com').first()
+    admin_role = models.Role.query.filter_by(name='admin').first()
+    # user_datastore.delete_user(admin_user)
+    # db.session.commit()
+    if admin_user == None and admin_role == None:
+        try:
+            pass_hash = generate_password_hash('zzzzzzzz')
+            user_datastore.create_role(name='admin', description='Administrator')
+            first_user = user_datastore.create_user(email='valentyn@gmail.com',
+                    password_hash=pass_hash, active=True, firstname='admin', secondname='admin', slug='q', roles=['admin'], username='valentyn')
+            user_datastore.toggle_active(first_user)
+            db.session.commit()
+            logout_user()
+            print('admin user created!')
+        except:
+            print('fail...')

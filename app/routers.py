@@ -11,7 +11,6 @@ from werkzeug.wsgi import responder
 
 
 @app.route('/')
-@app.route('/index')
 def index():
     search_form = SearchForm()
     form = RegistrationForm()
@@ -27,21 +26,20 @@ def login():
     search_form = SearchForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
+        print(user)
         if str(user) == '<User'+' '+str(request.form['username'])+'>':
             if user.check_password(form.password.data):
-                login_user(user, remember=form.remember_me.data)
+                print(user.check_password(form.password.data))
+                print(login_user(user, remember=form.remember_me.data, force=True))
                 next_page = request.args.get('next')
                 if not next_page or url_parse(next_page).netloc != '':
                     next_page = url_for('index')
                 return redirect(next_page)
             flash('Невірний логін або пароль!', category='error')
             return redirect(url_for('login'))
-            print(User.query.filter_by(email=form.username.data).first())
             users = User.query.filter_by(email=form.username.data).first()
-            print(users)
         user = User.query.filter_by(email=form.username.data).first()
         users = User.query.all()
-        print(user)
         for u in users:
             if str(user) == '<User'+' '+str(u.username)+'>':
                 if u.check_password(form.password.data):
@@ -78,7 +76,7 @@ def register():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @app.route('/profile/<username>')
 @login_required

@@ -31,7 +31,7 @@
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
 
           <div class="dropdown my-2 my-sm-0">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Меню
             </button>
             <div class="menu-drop dropdown-menu dropdown-menu-left">
@@ -49,26 +49,30 @@
               <li class="nav-item active">
                 <a class="nav-link" href="{{ url_for('index') }}">Головна</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Форум</a>
-              </li>
               
+             
               
-            </ul>
+          </ul>
+            
             {% if current_user.is_authenticated %}
             <div class="nav-item mr-sm-5 my-2">
               <a href="{{url_for('messages')}}"><span id="icon_chat" class="fa fa-wechat"></span></a>
-              {{ current_user.username }}
+              
             </div>
           {% endif %}
           <div class="form-inline">
+            {% if current_user.has_role('admin') %}
             
+              <a href="/admin"><button type="button" class="btn btn-warning  mr-sm-2 my-2 my-sm-0">Admin</button></a>
+    
+            {% endif %}
             <form class="my-2 my-lg-0 form_search">
               <input class="form-control mr-sm-2 " type="search" placeholder="Пошук" aria-label="Search" name="q" value="{{ request.args.get('q', '') }}" required='true'>
             </form>  
               <button class="btn btn-outline-success mr-sm-2 my-2 my-sm-0 btnbtn" type="submit">Шукати</button>
-          </div>
-        
+              
+            </div>
+            
         </nav>
       
       {% if form.errors %}
